@@ -2,6 +2,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Main from '../Layout/Main';
+import AddProgram from '../Pages/Private/AddProgram';
 import ReviewUpAdd from '../Pages/Private/ReviewUpAdd';
 import UpdateFormRev from '../Pages/Private/UpdateFormRev';
 import UserReviews from '../Pages/Private/UserReviews';
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
                 loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
                 
             },
+            {
+                path: '/addProgram',
+                element: <Private><AddProgram></AddProgram></Private>
+            }
         ]
     }
 ])

@@ -37,18 +37,19 @@ const ProgramDetails = () => {
           <img src={info.image} alt="" />
         </div>
       </div>
-      <div className="review-section bg-gray-400 w-1/4">
+      <div className="review-section text-center bg-gray-200 w-full lg:w-1/4">
         <h2>this is review section</h2>
         <h2>load all reviews</h2>
+        <Link to={`/reviews/${_id}`}>
+          <button className="btn btn-success">add review</button>
+        </Link>
         {
             allReviews.map(eachReview => <EachReviewCard
             key={eachReview._id}
             eachReview={eachReview}
             ></EachReviewCard>)
         }
-        <Link to={`/reviews/${_id}`}>
-          <button className="btn btn-success">add review</button>
-        </Link>
+     
       </div>
     </div>
   );

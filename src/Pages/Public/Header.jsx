@@ -27,7 +27,7 @@ const handleLogout =()=>{
           <>
           
             <li className="font-semibold">
-              <Link to="/">Add A Service</Link>
+              <Link to="/addProgram">Add A Program</Link>
             </li>
             <li className="font-semibold">
               <Link to="/userReview">My Reviews</Link>

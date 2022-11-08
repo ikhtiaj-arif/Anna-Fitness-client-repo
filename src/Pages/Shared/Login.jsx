@@ -1,46 +1,79 @@
-import React, { useContext } from 'react';
+import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
+import React, { useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { AuthContext } from '../../Context/UserContext';
+import { AuthContext } from "../../Context/UserContext";
 
 const Login = () => {
-    const {user, logInUser, googleLogin, setUser, logOutUser} = useContext(AuthContext);
-    const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+  const { user, logInUser, googleLogin, setUser, logOutUser } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    console.log(name);
+
+    logInUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        // setName(name);
+        setUser(user);
+        const currUser = {
+          email: user.email,
+        };
+        getJwtToken(currUser)
+        navigate(from, { replace: true });
+
+        // console.log(user);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        const currUser = {
+          email: user.email
+        }
 
 
-    const handleSignUp =(event) => {
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const email = form.email.value
-        const password = form.password.value;
-       
+        getJwtToken(currUser)
+      })
+      .catch((e) => e);
+  };
 
-        console.log(name);
+  const handleGithubLogin = () => {};
 
-        logInUser(email, password)
-        .then(result => {
-            const user = result.user;
-            // setName(name);
-            setUser(user);
-            navigate(from, {replace: true})
+  const handleLogout = () => {
+    logOutUser().then().catch();
+  };
 
-            console.log(user)
-        })
-        .catch(e => console.log(e))
-    }
+  const getJwtToken = (user) => {
+    fetch("http://localhost:5000/userJWT", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // use http only cookie
+        localStorage.setItem("user-token", data.token);
+      });
+  };
 
-    const handleLogout =()=>{
-      logOutUser()
-      .then()
-      .catch()
-    }
-
-    return (
-        <div>
-            <div className="text-center mb-16">
-                { user?.email}
+  return (
+    <div>
+      <div className="text-center mb-16">
+        {user?.email}
         <h2>Log In TO Your Account</h2>
       </div>
       <form onSubmit={handleSignUp}>
@@ -59,7 +92,7 @@ const Login = () => {
             required
           />
         </div>
-     
+
         <div class="mb-6">
           <label
             for="password"
@@ -74,28 +107,28 @@ const Login = () => {
             required
           />
         </div>
-        
-       {user?.email ? 
-        <button
-        onClick={handleLogout}
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        logout
-      </button>
-       
-       
-       : 
-       <button
-       type="submit"
-       class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-     >
-       Log In
-     </button>
-       }
-       
+
+        {user?.email ? (
+          <button
+            onClick={handleLogout}
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            logout
+          </button>
+        ) : (
+          <>
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+            Log In
+          </button>
+            <button onClick={handleGoogleLogin} className="btn btn-error">Goolge login</button>
+            </>
+        )}
       </form>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Login;
