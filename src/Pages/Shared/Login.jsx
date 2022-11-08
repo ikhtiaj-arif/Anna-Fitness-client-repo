@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from '../../Context/UserContext';
 
 const Login = () => {
     const {user, logInUser, googleLogin, setUser, logOutUser} = useContext(AuthContext);
-
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
 
     const handleSignUp =(event) => {
@@ -22,7 +24,7 @@ const Login = () => {
             const user = result.user;
             // setName(name);
             setUser(user);
-            // navigate(from, {replace: true})
+            navigate(from, {replace: true})
 
             console.log(user)
         })

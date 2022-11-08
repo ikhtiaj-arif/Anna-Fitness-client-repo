@@ -9,6 +9,7 @@ import Home from '../Pages/Public/Home';
 import ProgramDetails from '../Pages/Public/HomeComponents/Details/ProgramDetails';
 import Login from '../Pages/Shared/Login';
 import Register from '../Pages/Shared/Register';
+import Private from './Private';
 
 
 const router = createBrowserRouter([
@@ -35,16 +36,16 @@ const router = createBrowserRouter([
             },
             {
                 path: '/reviews/:id',
-                element: <ReviewUpAdd></ReviewUpAdd>,
+                element: <Private><ReviewUpAdd></ReviewUpAdd></Private>,
                 loader: ({params}) => fetch(`http://localhost:5000/program/${params.id}`)
             },
             {
                 path: '/userReview',
-                element: <UserReviews></UserReviews>
+                element: <Private><UserReviews></UserReviews></Private>
             },
             {
                 path: '/updateForm/:id',
-                element: <UpdateFormRev></UpdateFormRev>,
+                element: <Private><UpdateFormRev></UpdateFormRev></Private>,
                 loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
                 
             },
