@@ -5,7 +5,10 @@ import { RouterProvider }from 'react-router-dom';
 
 function App() {
   return (
+    <div  className="lg:w-3/4 mx-auto">
+
     <RouterProvider router={router}></RouterProvider>
+    </div>
   );
 }
 
