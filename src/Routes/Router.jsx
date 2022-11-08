@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../Layout/Main';
 import ReviewUpAdd from '../Pages/Private/ReviewUpAdd';
+import UpdateFormRev from '../Pages/Private/UpdateFormRev';
 import UserReviews from '../Pages/Private/UserReviews';
 import Home from '../Pages/Public/Home';
 import ProgramDetails from '../Pages/Public/HomeComponents/Details/ProgramDetails';
@@ -39,6 +40,12 @@ const router = createBrowserRouter([
             {
                 path: '/userReview',
                 element: <UserReviews></UserReviews>
+            },
+            {
+                path: '/updateForm/:id',
+                element: <UpdateFormRev></UpdateFormRev>,
+                loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
+                
             },
         ]
     }

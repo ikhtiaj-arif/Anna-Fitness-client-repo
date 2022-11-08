@@ -1,4 +1,7 @@
 import React from "react";
+import { Link }from 'react-router-dom';
+
+
 
 const ReviewCard = ({ review }) => {
     const {programName, feedback, rating, programId, _id} = review;
@@ -15,7 +18,7 @@ const ReviewCard = ({ review }) => {
           <p>add stars:  {rating}</p>
           <div className="">
             <button className="btn btn-error">delete</button>
-            <button className="btn btn-primary">Update Link</button>
+            <Link to={`/updateForm/${_id}`}><button className="btn btn-success">Update</button></Link>
           </div>
         </div>
       </div>
