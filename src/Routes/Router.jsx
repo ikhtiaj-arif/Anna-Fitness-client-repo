@@ -31,7 +31,7 @@ const router = createBrowserRouter([
                 loader: ({params}) => fetch(`http://localhost:5000/program/${params.id}`)
             },
             {
-                path: '/review/:id',
+                path: '/reviews/:id',
                 element: <ReviewUpAdd></ReviewUpAdd>,
                 loader: ({params}) => fetch(`http://localhost:5000/program/${params.id}`)
             },

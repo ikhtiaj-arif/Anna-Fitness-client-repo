@@ -1,34 +1,68 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/UserContext";
 import { useLoaderData } from "react-router-dom";
 
 const ReviewUpAdd = () => {
+
   const { user } = useContext(AuthContext);
   const program = useLoaderData();
   const [rating, setRating] = useState(0);
   const { title, _id } = program;
-  console.log(rating);
+  
+//   load filtered reviews
+  const [allReviews, setAllReviews] = useState([])
+    console.log(allReviews);
+
+useEffect(()=>{
+    fetch('http://localhost:5000/reviews')
+    .then(res => res.json())
+    .then(data => setAllReviews(data))
+}, [])
 
 
-    const handleSubmit = (event) => {
+// post reviews
+    const handlePostToDb = (event) => {
         event.preventDefault();
         const form = event.target;
         const feedback = form.feedback.value;
         const contact = form.contact.value;
-
+        const email = user?.email || "Not Registered";
+        const photoURL = user?.photoURL || "Not Registered";
+        const displayName = user?.displayName || "Not Registered";
+        const ID = _id;
 
         const review = {
-            program_id: _id,
-            email: user.email,
-            name: user.displayName,
-            image: user.photoURL,
-            feedback: feedback,
+            programId: ID,
+            programName: title,
+            email,
+            displayName,
+            photoURL,
             rating,
+            feedback: feedback,
             contact: contact
           };
 
-          console.log(review, user)
+         
+        const url = 'http://localhost:5000/reviews'
+          fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(review)
+          })
+          .then(res => res.json())
+          .then(data => {
+            if(data.acknowledged){
+                // toast
+                // navigate
+                form.reset()
+            }
+          })
+          .catch(e => console.log(e))
+         
 
+        //   console.log(review)
     }
 
 
@@ -44,11 +78,13 @@ const ReviewUpAdd = () => {
 
   return (
     <div>
-      <h2 className="text-4xl font-bold">{title}</h2>
+       
+        <h2 className="text-4xl font-bold">{title}</h2>
       <h2 className="text-xl font-medium">{user?.displayName}</h2>
-
+        
+      <div className="lg:flex">
       <form 
-      onSubmit={handleSubmit}
+      onSubmit={handlePostToDb}
       className="md:w-2/4">
         <div class="mb-6">
           <label
@@ -93,8 +129,14 @@ const ReviewUpAdd = () => {
             );
           })}
         </div>
-        <button className="btn btn-danger">Add Review</button>
+        <button type="submit" className="btn btn-danger">Add Review</button>
       </form>
+
+
+      <div>
+
+      </div>
+      </div>
     </div>
   );
 };
