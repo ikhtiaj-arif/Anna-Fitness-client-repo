@@ -9,15 +9,7 @@ const ReviewUpAdd = () => {
   const [rating, setRating] = useState(0);
   const { title, _id } = program;
   
-//   load filtered reviews
-  const [allReviews, setAllReviews] = useState([])
-    console.log(allReviews);
 
-useEffect(()=>{
-    fetch('http://localhost:5000/reviews')
-    .then(res => res.json())
-    .then(data => setAllReviews(data))
-}, [])
 
 
 // post reviews
@@ -30,6 +22,8 @@ useEffect(()=>{
         const photoURL = user?.photoURL || "Not Registered";
         const displayName = user?.displayName || "Not Registered";
         const ID = _id;
+        const time = new Date().getTime() / 1000;
+        
 
         const review = {
             programId: ID,
@@ -39,7 +33,8 @@ useEffect(()=>{
             photoURL,
             rating,
             feedback: feedback,
-            contact: contact
+            contact: contact,
+            time
           };
 
          

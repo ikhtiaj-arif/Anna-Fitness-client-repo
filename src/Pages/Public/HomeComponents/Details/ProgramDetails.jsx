@@ -11,10 +11,10 @@ const ProgramDetails = () => {
   console.log(allReviews);
 
   useEffect(() => {
-    fetch("http://localhost:5000/reviews")
+    fetch(`http://localhost:5000/reviews/${_id}`)
       .then((res) => res.json())
       .then((data) => setAllReviews(data));
-  }, []);
+  }, [_id]);
 
 
   return (

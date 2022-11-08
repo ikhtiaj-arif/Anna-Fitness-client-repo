@@ -25,14 +25,12 @@ const handleLogout =()=>{
     
           { user && user.uid ? 
           <>
-          <li className="font-semibold">
-              <Link to="/">My Reviews</Link>
-            </li>
+          
             <li className="font-semibold">
               <Link to="/">Add A Service</Link>
             </li>
             <li className="font-semibold">
-              <Link to="/">My Reviews</Link>
+              <Link to="/userReview">My Reviews</Link>
             </li></>
             
           : 
