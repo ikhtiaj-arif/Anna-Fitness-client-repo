@@ -3,7 +3,7 @@ import { Link }from 'react-router-dom';
 
 
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, handleDelete }) => {
     const {programName, feedback, rating, programId, _id} = review;
   // fetch to get common data
   return (
@@ -17,7 +17,7 @@ const ReviewCard = ({ review }) => {
           <p>{feedback}</p>
           <p>add stars:  {rating}</p>
           <div className="">
-            <button className="btn btn-error">delete</button>
+            <button onClick={()=> handleDelete(_id)} className="btn btn-error">delete</button>
             <Link to={`/updateForm/${_id}`}><button className="btn btn-success">Update</button></Link>
           </div>
         </div>
