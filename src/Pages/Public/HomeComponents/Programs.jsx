@@ -39,12 +39,14 @@ const Programs = () => {
         <div>
             <h2>limit 3 programs  {programCount}//{pages}// loaded:{loadPrograms.length}</h2>
            
-           {
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 '>
+            {
             loadPrograms.map(program => <ProgramCard
             key={program._id}
             program={program}
             ></ProgramCard>)
            }
+            </div>
             <div className="pagination">
                 {
                     [...Array(pages).keys()].map(e => <button
