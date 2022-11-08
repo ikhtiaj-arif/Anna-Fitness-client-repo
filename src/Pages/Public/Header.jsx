@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/UserContext';
 
 const Header = () => {
+const {user, logOutUser} = useContext(AuthContext);
 
+const handleLogout =()=>{
+  logOutUser()
+  .then()
+  .catch()
+}
 
     const menuItem = (
         <>
@@ -15,9 +22,10 @@ const Header = () => {
           <li className="font-semibold ">
             <Link to="/register">Register</Link>
           </li>
-{/*     
-          {user?.uid ? (
-            <li className="font-semibold">
+    
+          { user && user.uid ? 
+          <>
+          <li className="font-semibold">
               <Link to="/">My Reviews</Link>
             </li>
             <li className="font-semibold">
@@ -25,12 +33,14 @@ const Header = () => {
             </li>
             <li className="font-semibold">
               <Link to="/">My Reviews</Link>
-            </li>
-          ) : (
+            </li></>
+            
+          : 
             <li className="font-semibold">
               
             </li>
-          )} */}
+          
+          }
         </>
       );
     return (
@@ -66,16 +76,25 @@ const Header = () => {
         </div>
     
         <div className="navbar-end">
-          {/* {user && user.uid ? (
+
+        <ul className="menu menu-horizontal p-0">{menuItem}</ul>
+          {user && user.uid ? (
             <button
-              onClick=''
+              onClick={handleLogout}
               className="btn btn-outline btn-accent "
             >
               Log Out
             </button>
-          ) : ( */}
-              <ul className="menu menu-horizontal p-0">{menuItem}</ul>
-          {/* )} */}
+          ) : (
+            <button
+            onClick=''
+            className="btn btn-outline btn-accent "
+          >
+           login
+          </button>
+            )
+          }
+          
         </div>
       </div>
     );

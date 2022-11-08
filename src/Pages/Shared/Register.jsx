@@ -14,7 +14,7 @@ const Register = () => {
         const password = form.password.value;
         const repeatPassword = form.repeatPassword.value;
 
-        console.log(name);
+       
 
         createUser(email, password)
         .then(result => {
