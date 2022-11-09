@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext,  useState } from "react";
 import { AuthContext } from "../../Context/UserContext";
 import { useLoaderData } from "react-router-dom";
 
@@ -42,7 +42,9 @@ const ReviewUpAdd = () => {
           fetch(url, {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                authorization : `Bearer ${localStorage.getItem("user-token")}`
+                  
             },
             body: JSON.stringify(review)
           })

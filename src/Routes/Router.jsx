@@ -47,7 +47,11 @@ const router = createBrowserRouter([
             {
                 path: '/updateForm/:id',
                 element: <Private><UpdateFormRev></UpdateFormRev></Private>,
-                loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:5000/review/${params.id}`,{
+                    headers: {
+                         authorization : `Bearer ${localStorage.getItem("user-token")}`
+                    }
+                })
                 
             },
             {

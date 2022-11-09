@@ -4,7 +4,8 @@ import { useLoaderData } from "react-router-dom";
 const UpdateFormRev = () => {
     const [rating, setRating] = useState(0);
     const review = useLoaderData();
-    const {contact, feedback, displayName, _id, programId} = review
+    const [upReview, setUpReview] = useState(review)
+    const { _id, programId, email} = review
    
     // get the program details
     const [currProgram, setCurrProgram] = useState([])
@@ -28,12 +29,14 @@ const UpdateFormRev = () => {
             rating,
             feedback: feedback,
             contact: contact,
-            time
+            time,
+            email
         }
         fetch(`http://localhost:5000/reviews/${_id}`, {
           method: "PUT",
           headers: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            authorization : `Bearer ${localStorage.getItem("user-token")}`
           },
           body: JSON.stringify(update)
         })
@@ -43,7 +46,9 @@ const UpdateFormRev = () => {
           if(data.modifiedCount > 0){
             // toast
             form.reset();
+            setUpReview(update);
             // navigate
+            alert('update successful')
           }
         })
 
@@ -75,7 +80,7 @@ const UpdateFormRev = () => {
             type="text"
             name="feedback"
             id="large-input"
-            defaultValue={feedback}
+            defaultValue={upReview.feedback}
             class="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
@@ -90,7 +95,7 @@ const UpdateFormRev = () => {
             type="number"
             name="contact"
             id="small-input"
-            defaultValue={contact}
+            defaultValue={upReview.contact}
             class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
@@ -103,6 +108,7 @@ const UpdateFormRev = () => {
                 key={index}
                 className={index <= rating ? "on" : "off"}
                 onClick={() => setRating(index)}
+                defaultValue={upReview.review}
               >
                 <span className="star">&#9733;</span>
               </button>

@@ -67,6 +67,7 @@ const Login = () => {
       .then((data) => {
         // use http only cookie
         localStorage.setItem("user-token", data.token);
+       
       });
   };
 
