@@ -33,9 +33,12 @@ const Programs = () => {
   // all program data end
 
   return (
-    <div>
-      <h2>
-        limit 3 programs {programCount}//{pages}// loaded:{loadPrograms.length}
+    <div className="mt-10 md:mt-20">
+      <h1 className="mb-5 text-5xl font-bold text-center text-lime-400">
+        See The Fitness Programs
+      </h1>
+      <h2 className="text-xl font-medium text-center mb-10">
+        Currently Available : {programCount}
       </h2>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 ">
@@ -43,14 +46,21 @@ const Programs = () => {
           <ProgramCard key={program._id} program={program}></ProgramCard>
         ))}
       </div>
-      <div className="pagination">
+      {/* pagination section */}
+      <div className="flex mt-10 justify-center space-x-1 dark:text-gray-100">
         {[...Array(pages).keys()].map((e) => (
-          <button key={e} className="btn btn-danger" onClick={() => setPage(e)}>
+          <button
+            key={e}
+            className="items-center justify-center font-semibold w-8 h-8 text-sm border rounded shadow-md text-white bg-green-600"
+            onClick={() => setPage(e)}
+          >
             {e}
           </button>
         ))}
-        <button onClick={() => setLoadPrograms(allPrograms)}>
-          see all Programs
+        <button
+         className="items-center justify-center font-semibold border px-2 rounded shadow-md text-white bg-green-600"
+        onClick={() => setLoadPrograms(allPrograms)}>
+          see all..
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
+import logo from '../../images/logo.png'
 
 const Header = () => {
 const {user, logOutUser} = useContext(AuthContext);
@@ -45,7 +46,7 @@ const handleLogout =()=>{
         </>
       );
     return (
-        <div className="navbar h-20 border">
+        <div className="navbar h-20 bg-ring-offset-{success}">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -66,19 +67,20 @@ const handleLogout =()=>{
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-64"
             >
               {menuItem}
             </ul>
           </div>
           <Link className="btn btn-ghost normal-case text-xl">
-            <img src='' alt="" />
+            <img src={logo} className="h-12" />
+            Anna Willer
           </Link>
         </div>
     
         <div className="navbar-end">
 
-        <ul className="menu menu-horizontal p-0">{menuItem}</ul>
+        <ul className="menu menu-horizontal p-0 hidden lg:flex">{menuItem}</ul>
           {user && user.uid ? (
             <button
               onClick={handleLogout}
