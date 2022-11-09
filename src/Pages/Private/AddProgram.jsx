@@ -2,52 +2,44 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../Context/UserContext";
 
 const AddProgram = () => {
-
-const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const handlePostToDb = (event) => {
     event.preventDefault();
     const form = event.target;
     const details = form.details.value;
     const title = form.title.value;
-    
+
     const image = form.image.value;
     const price = form.price.value;
-    
-   
-  
 
-  const program = {
-    title,
-    details,
-    image,
-    price,
-    email: user?.email,
-    name: user?.displayName
-  
+    const program = {
+      title,
+      details,
+      image,
+      price,
+      email: user?.email,
+      name: user?.displayName,
+    };
+
+    fetch("https://annas-fitness-server.vercel.app/allPrograms", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("user-token")}`,
+      },
+      body: JSON.stringify(program),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          // toast
+          alert("successfully added!");
+          form.reset();
+          // navigete
+        }
+      });
   };
- 
-  fetch('http://localhost:5000/allPrograms',{
-    method: "POST",
-    headers: {
-      'content-type': 'application/json',
-      authorization : `Bearer ${localStorage.getItem("user-token")}`
-    },
-    body: JSON.stringify(program)
-  })
-  .then(res => res.json())
-  .then(data => {
-    if(data.acknowledged) {
-      // toast
-      alert('successfully added!')
-      form.reset();
-      // navigete 
-    }
-  })
-
-
-  }
-
 
   return (
     <section className="p-6 dark:bg-gray-800 dark:text-gray-50">

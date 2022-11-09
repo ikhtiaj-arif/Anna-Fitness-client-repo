@@ -2,73 +2,70 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const UpdateFormRev = () => {
-    const [rating, setRating] = useState(0);
-    const review = useLoaderData();
-    const [upReview, setUpReview] = useState(review)
-    const { _id, programId, email} = review
-   
-    // get the program details
-    const [currProgram, setCurrProgram] = useState([])
-       const {image, title, details, price, price2} = currProgram;
+  const [rating, setRating] = useState(0);
+  const review = useLoaderData();
+  const [upReview, setUpReview] = useState(review);
+  const { _id, programId, email } = review;
 
-    useEffect(()=> {
-        fetch(`http://localhost:5000/program/${programId}`)
-        .then(res => res.json())
-        .then(data => setCurrProgram(data))
-    }, [programId])
+  // get the program details
+  const [currProgram, setCurrProgram] = useState([]);
+  const { image, title, details, price, price2 } = currProgram;
 
+  useEffect(() => {
+    fetch(`https://annas-fitness-server.vercel.app/program/${programId}`)
+      .then((res) => res.json())
+      .then((data) => setCurrProgram(data));
+  }, [programId]);
 
-    const handleUpdate = (event) => {
-        event.preventDefault();
-        const form = event.target;
-        const feedback = form.feedback.value;
-        const contact = form.contact.value;
-        const time = new Date().getTime() / 1000;
-        
-        const update = {
-            rating,
-            feedback: feedback,
-            contact: contact,
-            time,
-            email
-        }
-        fetch(`http://localhost:5000/reviews/${_id}`, {
-          method: "PUT",
-          headers: {
-            'content-type': 'application/json',
-            authorization : `Bearer ${localStorage.getItem("user-token")}`
-          },
-          body: JSON.stringify(update)
-        })
-        .then(res => res.json())
-        .then(data => {
-          // console.log(data)
-          if(data.modifiedCount > 0){
-            // toast
-            form.reset();
-            setUpReview(update);
-            // navigate
-            alert('update successful')
-          }
-        })
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const feedback = form.feedback.value;
+    const contact = form.contact.value;
+    const time = new Date().getTime() / 1000;
 
+    const update = {
+      rating,
+      feedback: feedback,
+      contact: contact,
+      time,
+      email,
     };
+    fetch(`https://annas-fitness-server.vercel.app/reviews/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("user-token")}`,
+      },
+      body: JSON.stringify(update),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data)
+        if (data.modifiedCount > 0) {
+          // toast
+          form.reset();
+          setUpReview(update);
+          // navigate
+          alert("update successful");
+        }
+      });
+  };
 
   return (
     <div>
-        <div className="program-details md:flex">
-            <img src={image} alt="" />
-            <div>
-            <h2>{title}</h2>
-            <p>{details}</p>
-            <p>{price} :{price2}</p>
-            </div>
+      <div className="program-details md:flex">
+        <img src={image} alt="" />
+        <div>
+          <h2>{title}</h2>
+          <p>{details}</p>
+          <p>
+            {price} :{price2}
+          </p>
         </div>
-        <h2>Your Review</h2>
-      <form
-          onSubmit={handleUpdate}
-        className="md:w-2/4 mx-auto"
-      >
+      </div>
+      <h2>Your Review</h2>
+      <form onSubmit={handleUpdate} className="md:w-2/4 mx-auto">
         <div class="mb-6">
           <label
             for="large-input"
@@ -116,7 +113,7 @@ const UpdateFormRev = () => {
           })}
         </div>
         <button type="submit" className="btn btn-info">
-         Update Review
+          Update Review
         </button>
       </form>
     </div>

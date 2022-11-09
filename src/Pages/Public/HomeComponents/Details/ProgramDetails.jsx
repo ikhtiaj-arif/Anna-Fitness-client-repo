@@ -11,11 +11,10 @@ const ProgramDetails = () => {
   console.log(allReviews);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews/${_id}`)
+    fetch(`https://annas-fitness-server.vercel.app/reviews/${_id}`)
       .then((res) => res.json())
       .then((data) => setAllReviews(data));
   }, [_id]);
-
 
   return (
     <div className="lg:flex ">
@@ -43,13 +42,12 @@ const ProgramDetails = () => {
         <Link to={`/reviews/${_id}`}>
           <button className="btn btn-success">add review</button>
         </Link>
-        {
-            allReviews.map(eachReview => <EachReviewCard
+        {allReviews.map((eachReview) => (
+          <EachReviewCard
             key={eachReview._id}
             eachReview={eachReview}
-            ></EachReviewCard>)
-        }
-     
+          ></EachReviewCard>
+        ))}
       </div>
     </div>
   );

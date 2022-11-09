@@ -8,11 +8,14 @@ const UserReviews = () => {
   const [userReviews, setUserReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`,{
-      headers: {
-        authorization : `Bearer ${localStorage.getItem("user-token")}`
+    fetch(
+      `https://annas-fitness-server.vercel.app/reviews?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("user-token")}`,
+        },
       }
-    })
+    )
       .then((res) => res.json())
       .then((data) => setUserReviews(data));
   }, [user?.email]);
@@ -20,15 +23,14 @@ const UserReviews = () => {
   // delete review
   const handleDelete = (ID) => {
     // console.log(remaining);
-   
-  
+
     const continueDelete = window.confirm("Sure You Want To Delete?");
     if (continueDelete) {
-      fetch(`http://localhost:5000/review/${ID}`, {
+      fetch(`https://annas-fitness-server.vercel.app/review/${ID}`, {
         method: "DELETE",
         headers: {
-          authorization : `Bearer ${localStorage.getItem("user-token")}`
-        }
+          authorization: `Bearer ${localStorage.getItem("user-token")}`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {

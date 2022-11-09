@@ -27,7 +27,7 @@ const Login = () => {
         const currUser = {
           email: user.email,
         };
-        getJwtToken(currUser)
+        getJwtToken(currUser);
         navigate(from, { replace: true });
 
         // console.log(user);
@@ -40,11 +40,10 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         const currUser = {
-          email: user.email
-        }
+          email: user.email,
+        };
 
-
-        getJwtToken(currUser)
+        getJwtToken(currUser);
       })
       .catch((e) => e);
   };
@@ -56,7 +55,7 @@ const Login = () => {
   };
 
   const getJwtToken = (user) => {
-    fetch("http://localhost:5000/userJWT", {
+    fetch("https://annas-fitness-server.vercel.app/userJWT", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -67,7 +66,6 @@ const Login = () => {
       .then((data) => {
         // use http only cookie
         localStorage.setItem("user-token", data.token);
-       
       });
   };
 
@@ -118,14 +116,16 @@ const Login = () => {
           </button>
         ) : (
           <>
-          <button
-            type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            <button
+              type="submit"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-            Log In
-          </button>
-            <button onClick={handleGoogleLogin} className="btn btn-error">Goolge login</button>
-            </>
+              Log In
+            </button>
+            <button onClick={handleGoogleLogin} className="btn btn-error">
+              Goolge login
+            </button>
+          </>
         )}
       </form>
     </div>

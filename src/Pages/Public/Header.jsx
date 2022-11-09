@@ -20,6 +20,9 @@ const handleLogout =()=>{
             <Link to="/login">login</Link>
           </li>
           <li className="font-semibold ">
+            <Link to="/blogs">Blogs</Link>
+          </li>
+          <li className="font-semibold ">
             <Link to="/register">Register</Link>
           </li>
     
