@@ -2,6 +2,7 @@ import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 import React, { useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const { user, logInUser, googleLogin, setUser, logOutUser } =
@@ -27,7 +28,7 @@ const Login = () => {
         const currUser = {
           email: user.email,
         };
-        
+
         getJwtToken(currUser);
         navigate(from, { replace: true });
 
@@ -45,9 +46,10 @@ const Login = () => {
         };
 
         getJwtToken(currUser);
+        toast.success("Login Successful!")
         navigate(from, { replace: true });
       })
-      .catch((e) => e);
+      .catch((e) => toast.error(e.message));
   };
 
   const handleGithubLogin = () => {};
