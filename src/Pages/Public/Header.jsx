@@ -18,9 +18,6 @@ const handleLogout =()=>{
             <Link to="/">Home</Link>
           </li>
           <li className="font-semibold ">
-            <Link to="/login">login</Link>
-          </li>
-          <li className="font-semibold ">
             <Link to="/blogs">Blogs</Link>
           </li>
           <li className="font-semibold ">
@@ -73,7 +70,7 @@ const handleLogout =()=>{
             </ul>
           </div>
           <Link className="btn btn-ghost normal-case text-xl">
-            <img src={logo} className="h-12" />
+            <img src={logo} alt="" className="h-12" />
             Anna Willer
           </Link>
         </div>

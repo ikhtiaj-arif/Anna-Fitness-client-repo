@@ -41,7 +41,7 @@ const Programs = () => {
         Currently Available : {programCount}
       </h2>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         {loadPrograms.map((program) => (
           <ProgramCard key={program._id} program={program}></ProgramCard>
         ))}
