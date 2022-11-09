@@ -1,11 +1,58 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../Context/UserContext";
 
 const AddProgram = () => {
+
+const {user} = useContext(AuthContext);
+
+  const handlePostToDb = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const details = form.details.value;
+    const title = form.title.value;
+    
+    const image = form.image.value;
+    const price = form.price.value;
+    
+   
+  
+
+  const program = {
+    title,
+    details,
+    image,
+    price,
+    email: user?.email,
+    name: user?.displayName
+  
+  };
+ 
+  fetch('http://localhost:5000/allPrograms',{
+    method: "POST",
+    headers: {
+      'content-type': 'application/json',
+      authorization : `Bearer ${localStorage.getItem("user-token")}`
+    },
+    body: JSON.stringify(program)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.acknowledged) {
+      // toast
+      alert('successfully added!')
+      form.reset();
+      // navigete 
+    }
+  })
+
+
+  }
+
+
   return (
     <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
       <form
-        novalidate=""
-        action=""
+        onSubmit={handlePostToDb}
         className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
       >
         <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900">
@@ -104,32 +151,45 @@ const AddProgram = () => {
           <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
             <div className="col-span-full sm:col-span-3">
               <label for="username" className="text-sm">
-                Username
+                Course Title
               </label>
               <input
-                id="username"
+                id="title"
+                name="title"
                 type="text"
-                placeholder="Username"
+                placeholder="course title"
+                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
+              />
+              <label for="username" className="text-sm">
+                Price
+              </label>
+              <input
+                id="price"
+                name="price"
+                type="number"
+                placeholder="price"
                 className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
               />
             </div>
             <div className="col-span-full sm:col-span-3">
               <label for="website" className="text-sm">
-                Website
+                Image URL
               </label>
               <input
                 id="website"
                 type="text"
+                name="image"
                 placeholder="https://"
                 className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
               />
             </div>
             <div className="col-span-full">
               <label for="bio" className="text-sm">
-                Bio
+                Details
               </label>
               <textarea
                 id="bio"
+                name="details"
                 placeholder=""
                 className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
               ></textarea>
@@ -145,10 +205,10 @@ const AddProgram = () => {
                   className="w-10 h-10 rounded-full dark:bg-gray-500 dark:bg-gray-700"
                 />
                 <button
-                  type="button"
+                  type="submit"
                   className="px-4 py-2 border rounded-md dark:border-gray-100"
                 >
-                  Change
+                  ADD Your Program
                 </button>
               </div>
             </div>
