@@ -43,7 +43,7 @@ const handleLogout =()=>{
         </>
       );
     return (
-        <div className="navbar h-20 bg-ring-offset-{success}">
+        <div className="navbar h-32 bg-ring-offset-{success}">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

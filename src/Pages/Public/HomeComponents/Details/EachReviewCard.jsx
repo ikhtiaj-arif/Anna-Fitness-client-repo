@@ -2,8 +2,8 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 
 const EachReviewCard = ({eachReview}) => {
-    const {displayName, photoURL, rating, feedback, time} = eachReview;
-    // sort acording to date
+    const {displayName, photoURL, rating, feedback} = eachReview;
+    
   return (
     <div className="mt-5 bg-gradient-to-t from-green-200 container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 dark:bg-gray-900 dark:text-gray-100">
       <div className="flex justify-between p-4">
@@ -17,7 +17,7 @@ const EachReviewCard = ({eachReview}) => {
           </div>
           <div>
             <h4 className="font-bold">{displayName}</h4>
-            <span className="text-sm dark:text-gray-400">{time}</span>
+          
           </div>
         </div>
         <div className="flex items-center space-x-2 text-yellow-500">

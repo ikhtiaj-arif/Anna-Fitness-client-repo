@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import trainer from "../../../images/anna-box (1).jpg";
 import trainer2 from "../../../images/anna-box (2).jpg";
 
@@ -22,7 +23,7 @@ const Trainer = () => {
             <h1 className='text-5xl font-bold'>HI! MY NAME IS Anna </h1>
             <p className='my-5'>ras pulvinar mattis nunc sed. Luctus accumsan tortor posuere ac ut consequat semper viverra. Tellus id interdum velit laoreet id donec ultrices tincidunt. Tincidunt augue interdum velit euismod.</p>
 
-            <button className="btn btn-primary w-full lg:w-3/4">Learn More About Me</button>
+            <Link to='/register'><button className="btn btn-primary w-full lg:w-3/4">Learn More About Me</button></Link>
             </div>
     </div>
   );

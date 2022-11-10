@@ -1,5 +1,6 @@
 import React from "react";
-import anna from '../../../images/anna (3).png'
+import { Link } from 'react-router-dom';
+import anna from '../../../images/anna (3).png';
 
 const HealthTips = () => {
   return (
@@ -11,7 +12,10 @@ const HealthTips = () => {
           excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
           id nisi.
         </p>
-        <button className="btn btn-primary w-full lg:w-2/4">View ALl Tips</button>
+        <Link to='/register'>
+          
+           <button className="btn btn-primary w-full lg:w-2/4">View ALl Tips</button>
+          </Link>
       </div>
         <div>
             <img src={anna} alt="" />

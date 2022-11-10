@@ -21,17 +21,16 @@ const BlogCard = ({blog}) => {
            </div>
            <div className="mt-3">
              <Link rel="noopener noreferrer" href="#" className="text-2xl font-bold hover:underline">{title}</Link>
-             <p className="mt-2">{details.slice(0, 100)}...</p>
+             <p className="mt-2">{details}</p>
            </div>
            <div className="flex items-center justify-between mt-4">
              
              <div>
                <Link rel="noopener noreferrer" href="#" className="flex items-center">
                  <img src={author.image} alt="avatar" className="object-cover w-10 h-10 mx-4 rounded-full dark:bg-gray-500" />
-               <span className="hover:underline dark:text-gray-400">{author.name}</span>
+               <span className="hover:font-semibold text-gray-600">{author.name}</span>
              </Link>
           </div>
-          <Link rel="noopener noreferrer" href="#" className="hover:underline hover:text-violet-400">Read more</Link>
          </div>
         </div>
       </div>

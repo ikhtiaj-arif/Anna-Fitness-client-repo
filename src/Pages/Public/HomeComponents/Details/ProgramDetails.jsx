@@ -40,10 +40,10 @@ console.log(program);
             </ul>
          
         </div>
-        <div className="md:flex">
+        <div className="lg:flex">
           
           <PhotoView src={info.image}>
-            <img src={info.image} style={{ objectFit: "cover" }} alt="" />
+            <img src={info.image} style={{ objectFit: "cover" }} className="max-w-2/4" alt="" />
           </PhotoView>
          <div className="p-5 text-center  bg-gradient-to-l from-cyan-200">
          <h2 className="mb-5 text-5xl font-bold">{info.title}</h2>

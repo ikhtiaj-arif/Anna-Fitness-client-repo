@@ -3,6 +3,7 @@ import { AuthContext } from "../../Context/UserContext";
 import { tabTitle } from "../../utilities/titleChange";
 import ReviewCard from "./ReviewCard";
 import { Link } from 'react-router-dom'
+import toast from "react-hot-toast";
 
 const UserReviews = () => {
   tabTitle('Your Reviews')
@@ -44,9 +45,9 @@ const UserReviews = () => {
         .then((data) => {
           if (data.deletedCount > 0) {
             const remaining = userReviews.filter((item) => item._id !== ID);
+            toast.success('Delete Successfully!');
             setUserReviews(remaining);
-            // toast
-            alert("successfully deleted!!!");
+          
           }
         });
     }
