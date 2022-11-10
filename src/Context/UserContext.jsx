@@ -19,9 +19,9 @@ const UserContext = ({children}) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
-    const updateUserName = (name) => {
+    const updateUserName = (profile) => {
         setLoading(true)
-        return updateProfile(auth.currentUser, name)
+        return updateProfile(auth.currentUser, profile)
     }
 
     const logInUser = (email, password) =>{
@@ -61,6 +61,7 @@ const UserContext = ({children}) => {
         user,
         setUser,
         loading,
+        setLoading,
         createUser,
         logInUser,
         updateUserName,

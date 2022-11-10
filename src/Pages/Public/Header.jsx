@@ -71,7 +71,7 @@ const handleLogout =()=>{
           </div>
           <Link className="btn btn-ghost normal-case text-xl">
             <img src={logo} alt="" className="h-12" />
-            Anna Willer
+           <h1 className='ml-2 font-bold'> Anna Willer</h1>
           </Link>
         </div>
     

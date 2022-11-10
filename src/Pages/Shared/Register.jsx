@@ -6,7 +6,7 @@ import { tabTitle } from "../../utilities/titleChange";
 
 const Register = () => {
   tabTitle('Register')
-    const {createUser, updateUserName, googleLogin, gitLogin, setUser, logOutUser} = useContext(AuthContext);
+    const {createUser,setLoading, updateUserName, googleLogin, gitLogin, setUser, logOutUser} = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -16,31 +16,44 @@ const Register = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
-        const email = form.email.value
+        const email = form.email.value;
+        const url = form.url.value;
         const password = form.password.value;
         const repeatPassword = form.repeatPassword.value;
 
-       
+        if(password === repeatPassword) {
+          createUser(email, password)
+          .then(result => {
+              const user = result.user;
+              updateUser(name, url);
+              setUser(user);
+              const currUser = {
+                email: user.email,
+              };
+              
+              getJwtToken(currUser);
+              toast.success('Registration Successful!')
+              navigate(from, { replace: true });
+              
+          })
+          .catch((e) => {
+            toast.error(e.message);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
 
-        createUser(email, password)
-        .then(result => {
-            const user = result.user;
-            setName(name);
-            setUser(user);
-            const currUser = {
-              email: user.email,
-            };
-            
-            getJwtToken(currUser);
-            navigate(from, { replace: true });
-            
-        })
-        .catch(e => console.log(e))
+        }
+        else{
+          toast.error('Wrong Password!')
+        }
+     
     }
 
-    const setName = (name) => {
+    const updateUser = (name, url) => {
         const profile = {
-            displayName: name
+            displayName: name,
+            photoURL: url
         }
         updateUserName(profile)
         .then( ()=> {})
@@ -79,11 +92,7 @@ const Register = () => {
     .catch(e => toast.error(e.message))
     }
 
-    const handleLogOut = () => {
-        logOutUser()
-        .then(()=>{})
-        .catch(e=>console.log(e))
-    }
+  
     const getJwtToken = (user) => {
       fetch("https://annas-fitness-server.vercel.app/userJWT", {
         method: "POST",
@@ -133,6 +142,22 @@ const Register = () => {
           <input
             type="text"
             name="name"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            placeholder="Jeff thompson"
+            required
+          />
+        </div>
+        <div class="mb-6">
+          <label
+            for="image"
+            
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Image URL
+          </label>
+          <input
+            type="text"
+            name="url"
             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="Jeff thompson"
             required

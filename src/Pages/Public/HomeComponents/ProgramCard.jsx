@@ -11,13 +11,13 @@ const ProgramCard = ({ program }) => {
 <div className="w-full max-w-md mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
 
 <PhotoView src={image}>
-  <img src={image} style={{ objectFit: 'cover' }} alt="" />
+  <img src={image} style={{ objectFit: 'cover' }} className="rounded-lg" alt="" />
 </PhotoView>
 
 
-    <div className="px-5 pb-5">
+    <div className="px-5 pb-5 shadow-xl rounded-xl">
         
-            <h5 className="text-xl font-semibold tracking-tight text-gray-700">{title}</h5>
+            <h5 className="text-xl py-3 font-semibold tracking-tight text-gray-700">{title}</h5>
             <p>{details.slice(0,100)}...</p>
         
         <div className="flex items-center mt-2.5 mb-5">
