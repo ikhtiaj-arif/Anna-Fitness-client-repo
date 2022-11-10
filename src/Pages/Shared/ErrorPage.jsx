@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link }from 'react-router-dom';
+import { tabTitle } from '../../utilities/titleChange';
 import Footer from '../Public/Footer';
 
 const ErrorPage = () => {
+	tabTitle('Page Not Found')
     return (
         <div>
            
