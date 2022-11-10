@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { tabTitle } from "../../utilities/titleChange";
 
 const UpdateFormRev = () => {
+  tabTitle('Update Reviews')
   const [rating, setRating] = useState(0);
   const review = useLoaderData();
   const [upReview, setUpReview] = useState(review);

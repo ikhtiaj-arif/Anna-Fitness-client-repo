@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Context/UserContext";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData,useNavigate } from "react-router-dom";
+import { tabTitle } from "../../utilities/titleChange";
+import toast from "react-hot-toast";
 
 const ReviewUpAdd = () => {
+  tabTitle('Add Review')
   const { user } = useContext(AuthContext);
   const program = useLoaderData();
   const [rating, setRating] = useState(0);
   const { title, _id } = program;
+  const navigate = useNavigate()
 
   // post reviews
   const handlePostToDb = (event) => {
@@ -44,12 +48,12 @@ const ReviewUpAdd = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          // toast
-          // navigate
+          toast.success('Review Added Successfully!')
           form.reset();
+          navigate(`/program/${ID}`)
         }
       })
-      .catch((e) => console.log(e));
+      .catch((e) => toast.error(e.message));
 
     //   console.log(review)
   };

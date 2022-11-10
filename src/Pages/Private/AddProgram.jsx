@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context/UserContext";
+import { tabTitle } from "../../utilities/titleChange";
 
 const AddProgram = () => {
+  tabTitle('Add Your Program')
   const { user } = useContext(AuthContext);
 
   const handlePostToDb = (event) => {

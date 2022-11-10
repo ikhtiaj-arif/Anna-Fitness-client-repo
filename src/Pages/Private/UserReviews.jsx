@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/UserContext";
+import { tabTitle } from "../../utilities/titleChange";
 import ReviewCard from "./ReviewCard";
 
 const UserReviews = () => {
+  tabTitle('Your Reviews')
   const { user } = useContext(AuthContext);
   // users reviews
   const [userReviews, setUserReviews] = useState([]);

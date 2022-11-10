@@ -3,8 +3,10 @@ import { useLoaderData, Link } from "react-router-dom";
 import EachReviewCard from "./EachReviewCard";
 import { PhotoView } from "react-photo-view";
 import { FaArrowAltCircleRight } from 'react-icons/fa';
+import { tabTitle } from "../../../../utilities/titleChange";
 
 const ProgramDetails = () => {
+  tabTitle('Program Details')
   const program = useLoaderData();
   const { _id, details, image, price, price2, title, info, info_2 } = program;
 console.log(program);

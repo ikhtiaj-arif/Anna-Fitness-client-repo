@@ -3,8 +3,10 @@ import React, { useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 import toast from 'react-hot-toast';
+import { tabTitle } from "../../utilities/titleChange";
 
 const Login = () => {
+  tabTitle('Log In')
   const { user, logInUser, googleLogin, setUser, logOutUser } =
     useContext(AuthContext);
   const navigate = useNavigate();

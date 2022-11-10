@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import { tabTitle } from "../../utilities/titleChange";
+
+
 const Blogs = () => {
+  tabTitle('Blogs')
   return (
     <div className="md:w-4/5 mx-auto">
       <Link
