@@ -69,7 +69,7 @@ const handleLogout =()=>{
               {menuItem}
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-xl">
+          <Link to='/' className="btn btn-ghost normal-case text-xl">
             <img src={logo} alt="" className="h-12" />
            <h1 className='ml-2 font-bold'> Anna Willer</h1>
           </Link>
