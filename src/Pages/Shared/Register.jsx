@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { Link ,useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 import { tabTitle } from "../../utilities/titleChange";
 
 const Register = () => {
   tabTitle('Register')
-    const {createUser, updateUserName, googleLogin, setUser, logOutUser} = useContext(AuthContext);
+    const {createUser, updateUserName, googleLogin, gitLogin, setUser, logOutUser} = useContext(AuthContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -54,12 +55,28 @@ const Register = () => {
             const currUser = {
               email: user.email,
             };
-    
             getJwtToken(currUser);
+            toast.success('Login Successful!')
             navigate(from, { replace: true });
 
         })
-        .catch(e => console.log(e))
+        .catch(e => toast.error(e.message))
+    }
+
+    const handleGitLogin = () => {
+      gitLogin()
+      .then(result =>{
+        const user = result.user;
+        setUser(user);
+        const currUser = {
+          email: user.email,
+        };
+        getJwtToken(currUser);
+        toast.success('Login Successful!')
+        navigate(from, { replace: true });
+
+    })
+    .catch(e => toast.error(e.message))
     }
 
     const handleLogOut = () => {
@@ -218,6 +235,7 @@ const Register = () => {
             </button>
 
             <button
+            onClick={handleGitLogin}
               type="button"
               class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
             >
