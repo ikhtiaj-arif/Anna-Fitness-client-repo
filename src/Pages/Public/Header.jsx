@@ -81,17 +81,18 @@ const handleLogout =()=>{
           {user && user.uid ? (
             <button
               onClick={handleLogout}
-              className="btn btn-outline btn-accent "
+              className="btn btn-outline btn-error "
             >
               Log Out
             </button>
           ) : (
+            <Link to='/login'>
             <button
-            onClick=''
-            className="btn btn-outline btn-accent "
+            className="btn btn-outline btn-info "
           >
            login
           </button>
+          </Link>
             )
           }
           
