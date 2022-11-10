@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/UserContext";
 import { tabTitle } from "../../utilities/titleChange";
 
 const AddProgram = () => {
-  tabTitle('Add Your Program')
+  tabTitle("Add Your Program");
   const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate()
 
   const handlePostToDb = (event) => {
     event.preventDefault();
@@ -35,123 +39,42 @@ const AddProgram = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          // toast
-          alert("successfully added!");
+          toast.success("Successfully Added!")
           form.reset();
-          // navigete
+          navigate('/')
         }
       });
   };
 
   return (
-    <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
+    <section className="p-6 dark:bg-gray-800 dark:text-gray-50 mt-20">
       <form
         onSubmit={handlePostToDb}
         className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid"
       >
-        <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900">
-          <div className="space-y-2 col-span-full lg:col-span-1">
-            <p className="font-medium">Personal Inormation</p>
-            <p className="text-xs">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
-              fuga autem eum!
-            </p>
+        <div className="space-y-2 flex items-center">
+          <img
+            src={user?.photoURL}
+            alt=""
+            className="w-10 h-10 rounded-full dark:bg-gray-500 dark:bg-gray-700"
+          />
+          <div className="ml-2">
+          <p className="font-medium">{user?.displayName}</p>
+          <p className="text-xs">{user?.email}</p>
           </div>
-          <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-            <div className="col-span-full sm:col-span-3">
-              <label for="firstname" className="text-sm">
-                First name
-              </label>
-              <input
-                id="firstname"
-                type="text"
-                placeholder="First name"
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full sm:col-span-3">
-              <label for="lastname" className="text-sm">
-                Last name
-              </label>
-              <input
-                id="lastname"
-                type="text"
-                placeholder="Last name"
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full sm:col-span-3">
-              <label for="email" className="text-sm">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="Email"
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full">
-              <label for="address" className="text-sm">
-                Address
-              </label>
-              <input
-                id="address"
-                type="text"
-                placeholder=""
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full sm:col-span-2">
-              <label for="city" className="text-sm">
-                City
-              </label>
-              <input
-                id="city"
-                type="text"
-                placeholder=""
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full sm:col-span-2">
-              <label for="state" className="text-sm">
-                State / Province
-              </label>
-              <input
-                id="state"
-                type="text"
-                placeholder=""
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-              />
-            </div>
-            <div className="col-span-full sm:col-span-2">
-              <label for="zip" className="text-sm">
-                ZIP / Postal
-              </label>
-              <input
-                id="zip"
-                type="text"
-                placeholder=""
-                className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
-              />
-            </div>
-          </div>
-        </fieldset>
-        <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900">
-          <div className="space-y-2 col-span-full lg:col-span-1">
-            <p className="font-medium">Profile</p>
-            <p className="text-xs">Adipisci fuga autem eum!</p>
-          </div>
+        </div>
+              <h2 className="ml-2 text-4xl font-bold text-gray-700">Create Your Own Fitness Program :</h2>
+        <fieldset className="grid grid-cols-4 gap-6 px-6 rounded-md shadow-sm dark:bg-gray-900">
           <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
             <div className="col-span-full sm:col-span-3">
               <label for="username" className="text-sm">
-                Course Title
+                Program Title
               </label>
               <input
                 id="title"
                 name="title"
                 type="text"
-                placeholder="course title"
+                placeholder="program title"
                 className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400 dark:border-gray-700 dark:text-gray-900"
               />
               <label for="username" className="text-sm">
@@ -189,20 +112,14 @@ const AddProgram = () => {
               ></textarea>
             </div>
             <div className="col-span-full">
-              <label for="bio" className="text-sm">
-                Photo
-              </label>
               <div className="flex items-center space-x-2">
-                <img
-                  src="https://source.unsplash.com/30x30/?random"
-                  alt=""
-                  className="w-10 h-10 rounded-full dark:bg-gray-500 dark:bg-gray-700"
-                />
                 <button
                   type="submit"
-                  className="px-4 py-2 border rounded-md dark:border-gray-100"
+                  class="text-md relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
                 >
-                  ADD Your Program
+                  <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Add Your Program To The List
+                  </span>
                 </button>
               </div>
             </div>
