@@ -10,11 +10,11 @@ const Home = () => {
     tabTitle('Anna Willers Fitness')
     return (
         <div>
-           <Banner></Banner>
-           <Programs></Programs>
-           <Trainer></Trainer>
-           <Benefits></Benefits>
-           <HealthTips></HealthTips>
+           <Banner/>
+           <Benefits/>
+           <Programs/>
+           <Trainer/>
+           <HealthTips/>
            
         </div>
     );

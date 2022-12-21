@@ -33,9 +33,9 @@ const Programs = () => {
   // all program data end
 
   return (
-    <div className="mt-10 md:mt-20">
-      <h1 className="mb-5 text-5xl font-bold text-center text-lime-400">
-        See The Fitness Programs
+    <div className="lg:w-3/4 mx-auto mt-10 md:mt-20">
+      <h1 className="mb-5 text-5xl font-bold text-center ">
+        See The <span className="text-lime-400">Fitness</span>  Programs
       </h1>
       <h2 className="text-xl font-medium text-center mb-10">
         Currently Available : {programCount}
@@ -51,14 +51,14 @@ const Programs = () => {
         {[...Array(pages).keys()].map((e) => (
           <button
             key={e}
-            className="items-center justify-center font-semibold w-8 h-8 text-sm border rounded shadow-md text-white bg-green-600"
+            className="items-center justify-center font-semibold w-8 h-8 text-sm border rounded shadow-md text-white bg-primary"
             onClick={() => setPage(e)}
           >
             {e}
           </button>
         ))}
         <button
-         className="items-center justify-center font-semibold border px-2 rounded shadow-md text-white bg-green-600"
+         className="items-center justify-center font-semibold border px-2 rounded shadow-md text-white bg-primary"
         onClick={() => setLoadPrograms(allPrograms)}>
           see all..
         </button>

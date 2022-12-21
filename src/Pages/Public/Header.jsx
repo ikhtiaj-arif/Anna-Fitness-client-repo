@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Action from '../../Components/Action';
+import ActionOutline from '../../Components/ActionOutline';
 import { AuthContext } from '../../Context/UserContext';
 import logo from '../../images/logo.png'
 
@@ -43,7 +45,7 @@ const handleLogout =()=>{
         </>
       );
     return (
-        <div className="navbar h-32 bg-ring-offset-{success}">
+        <div className="navbar lg:w-3/4 mx-auto h-32 bg-ring-offset-{success}">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -87,11 +89,10 @@ const handleLogout =()=>{
             </button>
           ) : (
             <Link to='/login'>
-            <button
-            className="btn btn-outline btn-info "
-          >
-           login
-          </button>
+            <ActionOutline
+            className="btn btn-outline btn-primary "
+            title='login'
+          />
           </Link>
             )
           }

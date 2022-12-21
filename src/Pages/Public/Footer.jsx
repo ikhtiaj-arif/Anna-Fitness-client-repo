@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Action from "../../Components/Action";
+import ActionOutline from "../../Components/ActionOutline";
 
 const Footer = () => {
   return (
     <div className="mt-52">
-      <div className="w-full min-h-screen flex items-center justify-center bg-black">
+      <div className="w-full py-20 flex items-center justify-center bg-gray-700">
         <div className="md:w-2/3 w-full px-4 text-white flex flex-col">
           <div className="w-full text-5xl font-bold">
             <h1 className="w-full md:w-2/3">
@@ -17,8 +19,9 @@ const Footer = () => {
               You can chose your training program according to your choise.
             </p>
             <div className="w-44 pt-6 md:pt-0">
-              <Link className="bg-red-500 justify-center text-center rounded-lg shadow px-10 py-3 flex items-center">
-                Contact US
+              <Link className="">
+               <Action title="Contact US"/>
+
               </Link>
             </div>
           </div>
@@ -58,24 +61,24 @@ const Footer = () => {
                   />
                 </svg>
               </div>
-              <Link className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">
+              <Link className="hidden md:block cursor-pointer text-gray-300 hover:text-white uppercase">
                 About
               </Link>
               <Link
                 to=""
-                className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase"
+                className="hidden md:block cursor-pointer text-gray-300 hover:text-white uppercase"
               >
                 Services
               </Link>
-              <Link className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">
+              <Link className="hidden md:block cursor-pointer text-gray-300 hover:text-white uppercase">
                 Why us
               </Link>
-              <Link className="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase">
+              <Link className="hidden md:block cursor-pointer text-gray-300 hover:text-white uppercase">
                 Contact
               </Link>
             </div>
             <hr className="border-gray-600" />
-            <p className="w-full text-center my-12 text-gray-600">
+            <p className="w-full text-center my-12 text-gray-300">
               Copyright © 2022 MD.Ikhtiaj Arif
             </p>
             <div className="flex flex-row space-x-8 items-center justify-center">

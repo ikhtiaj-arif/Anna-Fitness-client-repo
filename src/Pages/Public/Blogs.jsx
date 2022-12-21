@@ -11,7 +11,7 @@ const blogs = useLoaderData()
 console.log(blogs);
 
   return (
-    <div>
+    <div className="lg:w-3/4 mx-auto">
       <h1>Welcome To My Blogs</h1>
       {
         blogs.map(blog => <BlogCard
