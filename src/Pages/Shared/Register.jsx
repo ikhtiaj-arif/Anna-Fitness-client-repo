@@ -111,7 +111,7 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen md:w-3/4 lg:w-2/4 mx-auto mt-28 text">
+    <div className=" md:w-3/4 md:p-24 shadow-xl rounded-xl h-auto lg:w-2/4 mx-auto mt-28 text">
       <div className="text-center mb-16">
         <h2 className="text-5xl font-bold text-gray-700">
           Create A New Account

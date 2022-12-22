@@ -4,6 +4,7 @@ import EachReviewCard from "./EachReviewCard";
 import { PhotoView } from "react-photo-view";
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 import { tabTitle } from "../../../../utilities/titleChange";
+import ActionOutline from "../../../../Components/ActionOutline";
 
 const ProgramDetails = () => {
   tabTitle('Program Details')
@@ -60,9 +61,12 @@ console.log(program);
       <div className="review-section text-center px-2 w-full lg:w-2/6">
         
         <h2  className="mb-5 text-4xl font-bold p-4">All User Reviews</h2>
+        <div className="w-2/3 mx-auto">
+
         <Link to={`/reviews/${_id}`}>
-          <button className="btn btn-success w-full">add a review</button>
+          <ActionOutline title="add a review"/>
         </Link>
+        </div>
         {allReviews.map((eachReview) => (
           <EachReviewCard
             key={eachReview._id}

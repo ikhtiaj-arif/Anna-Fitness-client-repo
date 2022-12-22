@@ -102,7 +102,7 @@ const Login = () => {
   };
 
   return (
-    <div className="w-3/4 mx-auto lg:w-2/4 mt-20 h-screen">
+    <div className="w-3/4 mx-auto lg:w-2/4 mt-20 h-auto md:p-24 shadow-xl rounded-xl">
       <div className="text-center mb-16">
         {user?.email}
         <h2 className="text-5xl text-gray-800 font-bold">
